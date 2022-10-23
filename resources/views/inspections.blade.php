@@ -1,6 +1,6 @@
 @extends('layouts.layout1')
 
-@section('title','Blaztoiz | Inspeções')
+@section('title','Blastoiz | Inspeções')
 
 @section('content')
 

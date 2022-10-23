@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,10 @@ Route::get('aboutUs',[MainController::class,'aboutUs']);
 
 
 /*ROTAS DE POST*/
-Route::post('customers', [PostController::class,'addCustomer']);
+Route::post('addCustomer', [PostController::class,'addCustomer']);
 
 
 /*ROTAS DE DELETE */
-Route::delete('customers', [MainController::class,'deleteCustomer']);
+Route::delete('customers/{id}', [DeleteController::class, 'deleteCustomer']);
 
 

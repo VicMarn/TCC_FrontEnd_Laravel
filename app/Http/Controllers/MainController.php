@@ -45,9 +45,4 @@ class MainController extends Controller
         return view('aboutUs');
     }
 
-    public function deleteCustomer(){
-        $delResponse = Http::delete('http://tccfireinspectionapi-env.eba-rwbw4xg4.us-east-1.elasticbeanstalk.com/api/deleteCustomer/15');
-        return $delResponse;
-    }
-
 }

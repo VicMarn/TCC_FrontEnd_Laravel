@@ -3,6 +3,11 @@
 @section('title','Blastoiz | Clientes')
 
 @section('content')
+  <div class="row">
+    @if(session('msg'))
+      <p class="bg-success text-center text-light">{{session('msg')}}</p>
+    @endif
+  </div>
   <div class="container mt-4">
     <div class="d-flex align-items-end text-start">
       <img src="/img/clientes.svg" height="40" alt="Ícone Clientes">
@@ -36,7 +41,11 @@
                 <div class="col">
                   <a data-bs-toggle="modal" data-bs-target="#customer_visualization" class="btn btn-success">VISUALIZAR</a>
                   <a data-bs-toggle="modal" data-bs-target="#customer_update" class="btn btn-warning">EDITAR</a>
-                  <form class="d-inline" action="customers" method="DELETE"><button class="btn btn-danger">EXCLUIR</button></form>
+                  <form class="d-inline" action='customers/{{$customer["id"]}}' method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-danger">EXCLUIR</button>
+                  </form>
                   
                 </div>
               </td>
@@ -94,7 +103,7 @@
           <h5 class="modal-title" id="exampleModalLabel">CADASTRAR CLIENTE</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="customers" method="POST">
+        <form action="addCustomer" method="POST">
           @csrf
           <div class="modal-body">
             <div class="mb-3">
