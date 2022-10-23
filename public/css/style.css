@@ -1,0 +1,27 @@
+/*MQs para acertar as margens da segunda linha de cards e para dar margem entre os cards em telas pequenas.
+  Eu usei essas MQs tanto no menu principal quanto na página "Sobre nós"*/
+@media (min-width: 768px){
+    #secondRow{
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 767px){
+    .cardMarginBottom{
+        margin-bottom: 20px;
+    }
+}
+
+/*MQs de controle do tamanho do texto da página Sobre nós*/
+@media (min-width: 1200px){
+    .sobreNosTexto{
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width: 992px) and (max-width:1199px) {
+    .sobreNosTexto{
+        font-size: 1.2em;
+    }
+}
