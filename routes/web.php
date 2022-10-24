@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DeleteController;
-
+use App\Http\Controllers\UpdateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +40,7 @@ Route::post('addCustomer', [PostController::class,'addCustomer']);
 
 
 /*ROTAS DE DELETE */
-Route::delete('customers/{id}', [DeleteController::class, 'deleteCustomer']);
+Route::delete('customer/{id}', [DeleteController::class, 'deleteCustomer']);
 
-
+/*ROTAS DE PUT*/
+Route::put('customer/{id}',[UpdateController::class,'putCustomer']);

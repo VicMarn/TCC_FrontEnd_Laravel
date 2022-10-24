@@ -40,8 +40,8 @@
               <td class="text-center">
                 <div class="col">
                   <a data-bs-toggle="modal" data-bs-target="#customer_visualization" class="btn btn-success">VISUALIZAR</a>
-                  <a data-bs-toggle="modal" data-bs-target="#customer_update" class="btn btn-warning">EDITAR</a>
-                  <form class="d-inline" action='customers/{{$customer["id"]}}' method="POST">
+                  <a data-bs-toggle="modal" data-bs-target='#editCustomer-{{$customer["id"]}}' class="btn btn-warning">EDITAR</a>
+                  <form class="d-inline" action='customer/{{$customer["id"]}}' method="POST">
                     @method('DELETE')
                     @csrf
                     <button class="btn btn-danger">EXCLUIR</button>
@@ -50,6 +50,49 @@
                 </div>
               </td>
             </tr>
+            <!-- EDITAR DADOS CLIENTE -->
+            <div class="modal fade" id='editCustomer-{{$customer["id"]}}' tabindex="-1" aria-labelledby="atualizar" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">EDITAR CLIENTE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action='customer/{{$customer["id"]}}' method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nome cliente</label>
+                        <input type="text" name="name" class="form-control" id="exampleFormControlInput1" value='{{$customer["name"]}}'>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="exampleFormControlInput1" value='{{$customer["email"]}}'>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
+                        <input type="text" name="phone" class="form-control" id="exampleFormControlInput1" value='{{$customer["phone"]}}'>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
+                        <input type="text" name="website" class="form-control" id="exampleFormControlInput1" value='{{$customer["website"]}}'>
+                      </div>
+                      <!--  
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Foto</label>
+                        <input class="form-control" type="file" id="formFile">
+                      </div>
+                      -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                      <button type="submit" class="btn-primary">ATUALIZAR</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           @endforeach
         </tbody>
       </table>
@@ -138,41 +181,5 @@
   </div>
 
 
-  <!-- EDITAR DADOS CLIENTE -->
-  <div class="modal fade" id="customer_update" tabindex="-1" aria-labelledby="atualizar" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">EDITAR CLIENTE</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nome cliente</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" >
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" >
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" >
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" >
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Foto</label>
-            <input class="form-control" type="file" id="formFile">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" data-bs-dismiss="modal">FECHAR</button>
-          <button type="button" class="btn-primary">ATUALIZAR</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 @endsection
