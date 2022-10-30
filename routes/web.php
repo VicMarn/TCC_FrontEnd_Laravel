@@ -37,10 +37,12 @@ Route::get('aboutUs',[MainController::class,'aboutUs']);
 
 /*ROTAS DE POST*/
 Route::post('addCustomer', [PostController::class,'addCustomer']);
-
+Route::post('addUser',[PostController::class,'addUser']);
 
 /*ROTAS DE DELETE */
 Route::delete('customer/{id}', [DeleteController::class, 'deleteCustomer']);
+Route::delete('user/{id}',[DeleteController::class,'deleteUser']);
 
 /*ROTAS DE PUT*/
 Route::put('customer/{id}',[UpdateController::class,'putCustomer']);
+Route::put('user/{id}',[UpdateController::class,'putUser']);

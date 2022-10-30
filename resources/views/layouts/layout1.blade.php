@@ -53,14 +53,16 @@
     
     @yield('content')
 
+    <footer class="footer navbar-fixed-bottom mt-5 mb-3">
+        <div class="text-center">
+            <h6>&copy; 2022 Blastoiz.</h6>
+        </div>
+    </footer>
+
     <!--Bootstrap JS-->
     <script src="/js/bootstrap.bundle.min.js"></script>
 
 </body>
-<footer class="footer navbar-fixed-bottom mt-5 mb-3">
-    <div class="text-center">
-        <h6>&copy; 2022 Blastoize.</h6>
-    </div>
-</footer>
+
 
 </html>

@@ -44,7 +44,7 @@
                     <div class="card border-secondary cardMarginBottom">
                         <div class="card-body text-center">
                             <img src="/img/documento.svg" height="50" alt="Ícone inspeção">
-                            <h3 class="card-title">Ellen Victória</h3>
+                            <h3 class="card-title">Ellen Vitória</h3>
                             <p class="text-muted" style="white-space:nowrap">Documentadora</p>
                         </div>
                     </div>

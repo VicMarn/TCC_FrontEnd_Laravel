@@ -14,7 +14,7 @@
       <h3 class="ms-2 mb-0">Clientes</h3>
     </div>
     <hr>
-    <div class="text-right my-2">
+    <div class="my-2">
       <a data-bs-toggle="modal" data-bs-target="#customer_register" class="btn btn-primary mb-2">CADASTRAR CLIENTE</a>
     </div>
     <!-- TABELA -->
@@ -39,11 +39,11 @@
               <td class="text-center">{{$customer["phone"]}}</td>
               <td class="text-center">
                 <div class="col">
-                  <a data-bs-toggle="modal" data-bs-target="#customer_visualization" class="btn btn-success">VISUALIZAR</a>
+                  <a data-bs-toggle="modal" data-bs-target='#viewCustomer-{{$customer["id"]}}' class="btn btn-success">VISUALIZAR</a>
                   <a data-bs-toggle="modal" data-bs-target='#editCustomer-{{$customer["id"]}}' class="btn btn-warning">EDITAR</a>
                   <form class="d-inline" action='customer/{{$customer["id"]}}' method="POST">
-                    @method('DELETE')
                     @csrf
+                    @method('DELETE')
                     <button class="btn btn-danger">EXCLUIR</button>
                   </form>
                   
@@ -86,10 +86,50 @@
                       -->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn-secondary" data-bs-dismiss="modal">FECHAR</button>
-                      <button type="submit" class="btn-primary">ATUALIZAR</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                      <button type="submit" class="btn btn-primary">ATUALIZAR</button>
                     </div>
                   </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- VISUALIZAR DADOS CLIENTE -->
+            <div class="modal fade" id='viewCustomer-{{$customer["id"]}}' tabindex="-1" aria-labelledby="visualizar" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">VISUALIZAR CLIENTE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Nome cliente</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" value='{{$customer["name"]}}' disabled>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" value='{{$customer["email"]}}' disabled>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" value='{{$customer["phone"]}}' disabled>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" value='{{$customer["website"]}}' disabled>
+                    </div>
+                    <!-- 
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Foto</label>
+                      <input class="form-control" type="file" id="formFile" disabled>
+                    </div>
+                     -->
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                    <!-- <button type="button" class="btn btn-primary">ATUALIZAR</button> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,43 +139,7 @@
     </div>
   </div>
 
-  <!-- VISUALIZAR DADOS CLIENTE -->
-  <div class="modal fade" id="customer_visualization" tabindex="-1" aria-labelledby="visualizar" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">VISUALIZAR CLIENTE</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nome cliente</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Foto</label>
-            <input class="form-control" type="file" id="formFile" disabled>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
-          <button type="button" class="btn btn-primary">ATUALIZAR</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
 
   <!-- CADASTRAR CLIENTE -->
