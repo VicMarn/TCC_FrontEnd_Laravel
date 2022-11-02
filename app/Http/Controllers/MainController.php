@@ -20,23 +20,33 @@ class MainController extends Controller
     }
 
     public function customers(){
-        $customers = Http::get('http://tccfireinspectionapi-env.eba-rwbw4xg4.us-east-1.elasticbeanstalk.com/api/customers');
+        $customers = Http::get('http://127.0.0.1:8000/api/customers');
         $customers = $customers->json();
         return view('customers')->with('customers', $customers);
     }
 
     public function inspections(){
-        $inspections = Http::get('http://tccfireinspectionapi-env.eba-rwbw4xg4.us-east-1.elasticbeanstalk.com/api/inspections');
+        $inspections = Http::get('http://127.0.0.1:8000/api/inspections');
+        $inspectionsCustomers=Http::get('http://127.0.0.1:8000/api/customers');
         $inspections = $inspections->json();
-        return view('inspections')->with('inspections',$inspections);
-    }
+        $inspectionsCustomers = $inspectionsCustomers->json();
+        return view('inspections')
+            ->with('inspections',$inspections)
+            ->with('inspCustomers', $inspectionsCustomers);
+    }   
 
     public function newInspection(){
         return view('newInspection');
     }
 
+    public function editInspection($id){
+        $editInspection = Http::get('http://127.0.0.1:8000/api/inspection/'.$id);
+        $editInspection = $editInspection->json();
+        return view('newInspection')->with('inspection',$editInspection);
+    }
+
     public function systemUsers(){
-        $sysUsers = Http::get('http://tccfireinspectionapi-env.eba-rwbw4xg4.us-east-1.elasticbeanstalk.com/api/users');
+        $sysUsers = Http::get('http://127.0.0.1:8000/api/users');
         $sysUsers= $sysUsers->json();
         return view('systemUsers')->with('sysUsers',$sysUsers);
     }

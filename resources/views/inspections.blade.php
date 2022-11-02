@@ -10,8 +10,8 @@
       <h3 class="ms-2 mb-0">Inspeções</h3>
     </div>
     <hr>
-    <div class="text-right my-2">
-      <a href="newInspection" class="btn btn-primary mb-2">NOVA INSPEÇÃO</a>
+    <div class="my-2">
+      <a data-bs-toggle="modal" data-bs-target="#newInspModal" class="btn btn-primary mb-2">NOVA INSPEÇÃO</a>
     </div>
 
     <!-- TABELA -->
@@ -20,8 +20,8 @@
         <thead class="table-primary">
           <tr>
             <th scope="col" class="text-center">#</th>
-            <th scope="col" class="text-center">ID Inspetor</th>
-            <th scope="col" class="text-center" style="white-space:nowrap">ID Cliente Inspecionado</th>
+            <th scope="col" class="text-start">Título</th>
+            <th scope="col" class="text-center" style="white-space:nowrap">ID Cliente</th>
             <th scope="col" class="text-center">Data</th>
             <th scope="col" class="text-center">Ações</th>
           </tr>
@@ -31,20 +31,73 @@
           @foreach($inspections as $inspection)
             <tr>
               <th scope="row" class="text-center">{{$loop->index + 1}}</th>
-              <td class="text-center">{{$inspection["user_id"]}}</td>
+              <td scope="row" class="text-start">{{$inspection["title"]}}</td>
               <td class="text-center">{{$inspection["customer_id"]}}</td>
-              <td class="text-center">{{$inspection["date"]}}</td>
+              <td class="text-center">{{$inspection["start_date"]}}</td>
               <td class="text-center">
                 <div class="col">
+                  <a href='inspection/{{$inspection["id"]}}' class="btn btn-primary">INSPECIONAR</a>
                   <a data-bs-toggle="modal" data-bs-target="#inspection_details" class="btn btn-success">VISUALIZAR</a>
-                  <a href="new_inspection" class="btn btn-warning">EDITAR</a>
-                  <a href="new_inspection" class="btn btn-danger">EXCLUIR</a>
+                  <form action='inspection/{{$inspection["id"]}}' method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">EXCLUIR</button>
+                  </form>
                 </div>
               </td>
             </tr>
           @endforeach
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- CADASTRAR INSPEÇÃO -->
+  <div class="modal fade" id="newInspModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">NOVA INSPEÇÃO</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="addInspection" method="POST">
+          @csrf
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Cliente inspecionado</label>
+              <select class=form-select name="customer">
+                <option name="customer" value="">Selecionar cliente</option>
+                @foreach($inspCustomers as $inspCustomer)
+                  <option name="customer" value='{{$inspCustomer["id"]}}'>{{$inspCustomer["name"]}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Título</label>
+              <input name="title" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descrição</label>
+              <textarea name="description" class="form-control" cols="30" rows="5"></textarea>
+            </div>
+            <!--  
+            <div class="mb-3">
+              <label class="form-label">Data de início</label>
+              <input name="start_date" type="date" class="form-label">
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Data de finalização</label>
+              <input name="end_date" type="date" class="form-label">
+            </div>
+            -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+            <button type="submit" class="btn btn-primary">CADASTRAR</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 

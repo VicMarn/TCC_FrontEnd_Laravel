@@ -34,16 +34,16 @@
                         <a href="/" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="customers" class="nav-link">Clientes</a>
+                        <a href="/customers" class="nav-link">Clientes</a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="inspections" class="nav-link">Inspeções</a>
+                        <a href="/inspections" class="nav-link">Inspeções</a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="systemUsers" class="nav-link">Usuários</a>
+                        <a href="/systemUsers" class="nav-link">Usuários</a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="aboutUs" class="nav-link">Sobre nós</a>
+                        <a href="/aboutUs" class="nav-link">Sobre nós</a>
                     </li>
                 </ul>
             </div>

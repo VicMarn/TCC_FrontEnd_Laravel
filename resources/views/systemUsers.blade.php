@@ -25,7 +25,7 @@
             <th scope="col" class="text-center">#</th>
             <th scope="col" class="text-center">Id</th>
             <th scope="col">Nome</th>
-            <th scope="col" class="text-center">Ações</th>
+            <th scope="col" class="text-center"></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">CPF/CNPJ</label>
-                      <input type="text" class="form-control" value='{{$sysUser["cpf_cpnj"]}}' disabled>
+                      <input type="text" class="form-control" value='{{$sysUser["cpf_cnpj"]}}' disabled>
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Função</label>
@@ -110,7 +110,7 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">CPF/CNPJ</label>
-                        <input type="text" name="cpf_cnpj" class="form-control" value='{{$sysUser["cpf_cpnj"]}}'>
+                        <input type="text" name="cpf_cnpj" class="form-control" value='{{$sysUser["cpf_cnpj"]}}'>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Função</label>

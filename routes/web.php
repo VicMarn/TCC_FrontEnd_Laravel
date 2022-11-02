@@ -34,14 +34,19 @@ Route::get('systemUsers',[MainController::class,'systemUsers']);
 
 Route::get('aboutUs',[MainController::class,'aboutUs']);
 
+Route::get('inspection/{id}', [MainController::class,'editInspection']);
 
 /*ROTAS DE POST*/
 Route::post('addCustomer', [PostController::class,'addCustomer']);
 Route::post('addUser',[PostController::class,'addUser']);
+Route::post('addInspection',[PostController::class,'addInspection']);
+Route::post('/extinguisher/{id}',[PostController::class,'addExtinguisher']);
 
 /*ROTAS DE DELETE */
-Route::delete('customer/{id}', [DeleteController::class, 'deleteCustomer']);
+Route::delete('customer/{id}',[DeleteController::class, 'deleteCustomer']);
 Route::delete('user/{id}',[DeleteController::class,'deleteUser']);
+Route::delete('inspection/{id}',[DeleteController::class,'deleteInspection']);
+Route::delete('extinguisher/{id}',[DeleteController::class,'deleteExtinguisher']);
 
 /*ROTAS DE PUT*/
 Route::put('customer/{id}',[UpdateController::class,'putCustomer']);

@@ -25,8 +25,7 @@
             <th scope="col" class="text-center">#</th>
             <th scope="col" >Nome</th>
             <th scope="col" class="text-center">E-mail</th>
-            <th scope="col" class="text-center">Telefone</th>
-            <th scope="col" class="text-center">Ações</th>
+            <th scope="col" class="text-center"></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -36,7 +35,6 @@
               <th scope="row" class="text-center">{{$loop->index + 1}}</th>
               <td >{{$customer["name"]}}</td>
               <td class="text-center">{{$customer["email"]}}</td>
-              <td class="text-center">{{$customer["phone"]}}</td>
               <td class="text-center">
                 <div class="col">
                   <a data-bs-toggle="modal" data-bs-target='#viewCustomer-{{$customer["id"]}}' class="btn btn-success">VISUALIZAR</a>
