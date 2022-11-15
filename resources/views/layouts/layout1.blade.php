@@ -54,8 +54,14 @@
     @yield('content')
 
     <footer class="footer navbar-fixed-bottom mt-5 mb-3">
-        <div class="text-center">
-            <h6>&copy; 2022 Blastoiz.</h6>
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-8 col-md-10 col-lg-8 text-center">
+                <hr>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/img/logoF.png" width="50" alt="logo BlastoiZ">
+                    <h6 class="ms-1"> 2022 Blastoiz.</h6>
+                </div>
+            </div>
         </div>
     </footer>
 

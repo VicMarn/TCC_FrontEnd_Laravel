@@ -8,7 +8,7 @@
       <p class="bg-success text-center text-light">{{session('msg')}}</p>
     @endif
   </div>
-  <div class="container mt-4">
+  <div class="container mt-4 rounded-4 shadow p-3">
     <div class="d-flex align-items-end text-left">
       <img src="/img/user.svg" height="40" alt="Ícone inspeção">
       <h3 class="ms-2 mb-0">Usuários do sistema</h3>
@@ -37,7 +37,7 @@
               <td >{{$sysUser["name"]}}</td>
               <td class="text-center">
                 <div class="col">
-                  <a data-bs-toggle="modal" data-bs-target='#viewUser-{{$sysUser["id"]}}' class="btn btn-success">VISUALIZAR</a>
+                  <a data-bs-toggle="modal" data-bs-target='#viewUser-{{$sysUser["id"]}}' class="btn btn-success">DETALHES</a>
                   <a data-bs-toggle="modal" data-bs-target='#editUser-{{$sysUser["id"]}}' class="btn btn-warning">EDITAR</a>
                   <form class="d-inline" action='user/{{$sysUser["id"]}}' method="POST">
                     @csrf

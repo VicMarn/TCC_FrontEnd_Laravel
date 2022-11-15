@@ -8,7 +8,7 @@
       <p class="bg-success text-center text-light">{{session('msg')}}</p>
     @endif
   </div>
-  <div class="container mt-4">
+  <div class="container mt-4 rounded-4 shadow p-3">
     <div class="d-flex align-items-end text-start">
       <img src="/img/clientes.svg" height="40" alt="Ícone Clientes">
       <h3 class="ms-2 mb-0">Clientes</h3>
@@ -37,7 +37,7 @@
               <td class="text-center">{{$customer["email"]}}</td>
               <td class="text-center">
                 <div class="col">
-                  <a data-bs-toggle="modal" data-bs-target='#viewCustomer-{{$customer["id"]}}' class="btn btn-success">VISUALIZAR</a>
+                  <a data-bs-toggle="modal" data-bs-target='#viewCustomer-{{$customer["id"]}}' class="btn btn-success">DETALHES</a>
                   <a data-bs-toggle="modal" data-bs-target='#editCustomer-{{$customer["id"]}}' class="btn btn-warning">EDITAR</a>
                   <form class="d-inline" action='customer/{{$customer["id"]}}' method="POST">
                     @csrf

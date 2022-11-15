@@ -16,7 +16,7 @@
             <div class="col-12 col-md-6 p-0 mt-0">
                 <p class="sobreNosTexto">Blastoize é um sistema de inspeção de equipamentos de combate a incêndio, 
                     desenvolvido como projeto de Trabalho de Conclusão de Curso, 
-                    para adquirir a formação de Tecnólogo em Análise e Desenvolvimento de Sistemas no Fatec Rubens Lara.
+                    para adquirir a formação de Tecnólogo em Análise e Desenvolvimento de Sistemas na Fatec Rubens Lara.
                 <p class="sobreNosTexto">O sistema foi desenvolvido utilizando a arquitetura MVC. A interface foi feita com HTML, CSS, JavaScript
                     e Bootstrap para auxiliar no design responsivo. O Backend foi desenvolvido utilizando PHP e Laravel.
                     Database: MySQL e Eloquent.

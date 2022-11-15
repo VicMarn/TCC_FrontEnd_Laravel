@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <div class="container mt-4">
+  <div class="container mt-4 rounded-4 shadow p-3">
     <div class="d-flex align-items-end text-left">
       <img src="/img/inpsectionIcon.svg" height="40" alt="Ícone inspeção">
       <h3 class="ms-2 mb-0">Inspeções</h3>

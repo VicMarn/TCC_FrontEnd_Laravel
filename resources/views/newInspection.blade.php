@@ -99,36 +99,36 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label class="form-label">Nome Extintor:</label>
-                                                <div class="fw-bold d-inline">{{$extinguisher["name"]}}</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["name"]}}</div>
                                                 
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Tipo Extintor:</label>
-                                                <div class="fw-bold d-inline">{{$extinguisher["type"]}}</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["type"]}}</div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Peso:</label>
-                                                <div class="fw-bold d-inline">{{$extinguisher["weight"]}}kg</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["weight"]}}kg</div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label mb-1">Status do Equipamento:</label>
                                                 @if($extinguisher["is_approved"])
-                                                    <div class="fw-bold d-inline">Aprovado</div>
+                                                    <div class="fw-bold border rounded-3 p-2">Aprovado</div>
                                                 @else
-                                                    <div class="fw-bold">Reprovado</div>
+                                                    <div class="fw-bold border rounded-3 p-2">Reprovado</div>
                                                 @endif
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Descrição:</label>
-                                                <div class="fw-bold d-inline">{{$extinguisher["description"]}}</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["description"]}}</div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Endereço da foto do extintor:</label>
-                                                <div class="fw-bold">{{$extinguisher["extinguisher_url_photo"]}}</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["extinguisher_url_photo"]}}</div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Endereço da foto do selo de inspeção:</label>
-                                                <div class="fw-bold">{{$extinguisher["inspection_seal_url_photo"]}}</div>
+                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["inspection_seal_url_photo"]}}</div>
                                             </div>
                                             
                                         </div>
