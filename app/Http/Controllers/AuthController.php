@@ -22,7 +22,7 @@ class AuthController extends Controller
         session()->put('user_id',$user_id);
         session()->put('btoken',$token);
         session()->put('role',$role);
-        return redirect('/');
+        return redirect('/menu');
     }
 
     public function logout(){
@@ -30,7 +30,7 @@ class AuthController extends Controller
         $logoutResponse = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->post('http://127.0.0.1:8000/api/logout');
         session()->flush();
-        return redirect('/login');
+        return redirect('/');
     }
     /*
     public function setCookie(){

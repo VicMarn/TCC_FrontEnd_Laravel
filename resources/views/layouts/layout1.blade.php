@@ -18,7 +18,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm p-0">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand p-0">
+            <a href="/menu" class="navbar-brand p-0">
                 <img src="/img/logoF.png" alt="Blastoize-logo" width="50" class="fluid-img">
                 <img src="/img/magnet.png" alt="" width="80">
             </a>
@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="top-nav">
                 <ul class="navbar-nav">
                     <li class="nav-item text-center">
-                        <a href="/" class="nav-link">Home</a>
+                        <a href="/menu" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item text-center">
                         <a href="/customers" class="nav-link">Clientes</a>

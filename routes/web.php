@@ -19,9 +19,9 @@ use App\Http\Controllers\AuthController;
 */
 
 /*ROTAS DE GET*/
-Route::get('/',[MainController::class,'menu']);
+Route::get('/',[MainController::class,'login']);
 
-Route::get('login',[MainController::class,'login']);
+Route::get('menu',[MainController::class,'menu']);
 
 Route::get('signup',[MainController::class,'signUp']);
 
