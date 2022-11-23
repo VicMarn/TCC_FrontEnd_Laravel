@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row justify-content-center"> 
                 <div class="col-11 col-sm-11 col-md-9 col-lg-7 border rounded-4 p-4 text-center bg-light">
-                    <form action="" onsubmit="clearFormatCPF()">
+                    <form action="" onsubmit="clearFormatCNPJ()" >
                         <h3 class="mb-4">Criar conta</h3>
                         
                         <div class="row text-start">
@@ -21,8 +21,8 @@
                                 <input type="text" id="name" class="form-control mb-3"  placeholder="Nome e sobrenome" required autofocus>
                             </div>
                             <div class="col-6 mb-2">
-                                <label for="cpf" class="form-label fw-bold">CPF</label>
-                                <input type="text" id="cpfInput" class="form-control" oninput="cpfMask()"> 
+                                <label for="cpf" class="form-label fw-bold">CNPJ</label>
+                                <input type="text" id="cnpjInput" class="form-control" oninput="cnpjMask()"> 
                                 <div id="cpfHelp" class="form-text mb-3"></div>
                             </div>
                             <div class="col-6">
@@ -58,17 +58,18 @@
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script>
-        function cpfMask(){
-            let valor = document.getElementById('cpfInput').value;
-            document.getElementById('cpfInput').value = valor.replace(/\D/g,'')
-                                                             .replace(/(\d{3})(\d)/, '$1.$2')
-                                                             .replace(/(\d{3})(\d)/,'$1.$2')
-                                                             .replace(/(\d{3})(\d{1,2})/,'$1-$2')
-                                                             .replace(/(-\d{2})\d+?$/, '$1');
+        function cnpjMask(){
+            let valor = document.getElementById('cnpjInput').value;
+            document.getElementById('cnpjInput').value = valor.replace(/\D/g,'')
+                                                              .replace(/(\d{2})(\d)/,'$1.$2')
+                                                              .replace(/(\d{3})(\d)/,'$1.$2')
+                                                              .replace(/(\d{3})(\d)/,'$1/$2')
+                                                              .replace(/(\d{4})(\d)/,'$1-$2')
+                                                              .replace(/(-\d{2})\d+?$/, '$1');
         }
 
-        function clearFormatCPF(){
-            let valorOriginal = document.getElementById('cpfInput').value;
+        function clearFormatCNPJ(){
+            let valorOriginal = document.getElementById('cnpjInput').value;
             let regex = /\d/g;
             let valorFiltrado = valorOriginal.match(regex);
             document.getElementById('name').value = valorFiltrado.join("");

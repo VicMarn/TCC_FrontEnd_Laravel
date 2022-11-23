@@ -19,8 +19,32 @@ class MainController extends Controller
         return view('signup');
     }
 
+    public function signupPJ(){
+        return view('signupPJ');
+    }
+
+    /*
     public function customers(){
         $customers = Http::get('http://127.0.0.1:8000/api/customers');
+        $customers = $customers->json();
+        return view('customers')->with('customers', $customers);
+    }
+    */
+
+    public function customers(){
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 2){
+            $url = 'company';
+        }
+        else{
+            $url = 'employee';
+        }
+        $customers = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
         $customers = $customers->json();
         return view('customers')->with('customers', $customers);
     }
@@ -45,8 +69,18 @@ class MainController extends Controller
         return view('newInspection')->with('inspection',$editInspection);
     }
 
+    /*
     public function systemUsers(){
         $sysUsers = Http::get('http://127.0.0.1:8000/api/users');
+        $sysUsers= $sysUsers->json();
+        return view('systemUsers')->with('sysUsers',$sysUsers);
+    }
+    */
+
+    public function systemUsers(){
+        $token = session()->get('btoken');
+        $sysUsers = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->get('http://127.0.0.1:8000/api/company/users');
         $sysUsers= $sysUsers->json();
         return view('systemUsers')->with('sysUsers',$sysUsers);
     }

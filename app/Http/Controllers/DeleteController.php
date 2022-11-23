@@ -8,12 +8,23 @@ use Illuminate\Support\Facades\Http;
 class DeleteController extends Controller
 {
     public function deleteCustomer($id){
-        $delCustomer = Http::delete('http://127.0.0.1:8000/api/customer/'.$id);
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 2){
+            $url = 'company';
+        }
+        $delCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->delete('http://127.0.0.1:8000/api/'.$url.'/customer/'.$id);
         return redirect()->back();
     }
 
     public function deleteUser($id){
-        $delUser = Http::delete('http://127.0.0.1:8000/api/user/'.$id);
+        $token = session()->get('btoken');
+        $delUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->delete('http://127.0.0.1:8000/api/company/user/'.$id);
         return redirect()->back();
     }
 

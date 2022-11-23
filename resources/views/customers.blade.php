@@ -14,9 +14,11 @@
       <h3 class="ms-2 mb-0">Clientes</h3>
     </div>
     <hr>
-    <div class="my-2">
-      <a data-bs-toggle="modal" data-bs-target="#customer_register" class="btn btn-primary mb-2">CADASTRAR CLIENTE</a>
-    </div>
+    @if(session()->get('role') != 3)
+      <div class="my-2">
+        <a data-bs-toggle="modal" data-bs-target="#customer_register" class="btn btn-primary mb-2">CADASTRAR CLIENTE</a>
+      </div>
+    @endif
     <!-- TABELA -->
     <div class="table-responsive">
       <table class="table">
@@ -38,13 +40,15 @@
               <td class="text-center">
                 <div class="col">
                   <a data-bs-toggle="modal" data-bs-target='#viewCustomer-{{$customer["id"]}}' class="btn btn-success">DETALHES</a>
-                  <a data-bs-toggle="modal" data-bs-target='#editCustomer-{{$customer["id"]}}' class="btn btn-warning">EDITAR</a>
-                  <form class="d-inline" action='customer/{{$customer["id"]}}' method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger">EXCLUIR</button>
-                  </form>
-                  
+                  @if(session()->get('role') !=3)
+                    <a data-bs-toggle="modal" data-bs-target='#editCustomer-{{$customer["id"]}}' class="btn btn-warning">EDITAR</a>
+                    <a data-bs-toggle="modal" data-bs-target='#deleteCustomer-{{$customer["id"]}}' class="btn btn-danger">EXCLUIR</a>
+                    <!-- <form class="d-inline" action='customer/{{$customer["id"]}}' method="POST"> 
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger">EXCLUIR</button>
+                    </form>-->
+                  @endif
                 </div>
               </td>
             </tr>
@@ -128,6 +132,29 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
                     <!-- <button type="button" class="btn btn-primary">ATUALIZAR</button> -->
                   </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- DELETAR CLIENTE -->
+            <div class="modal fade" id='deleteCustomer-{{$customer["id"]}}' tabindex="-1" aria-labelledby="deletar" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que quer excluir este cliente?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  
+                  <p class="text-muted text-center mt-2">Id: <b>{{$customer["id"]}}</b><br>Nome: <b>{{$customer["name"]}}</b></p>
+                  <form action='customer/{{$customer["id"]}}' method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-footer justify-content-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                      <button type="submit" class="btn btn-danger">EXCLUIR</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

@@ -39,10 +39,11 @@
                 <div class="col">
                   <a data-bs-toggle="modal" data-bs-target='#viewUser-{{$sysUser["id"]}}' class="btn btn-success">DETALHES</a>
                   <a data-bs-toggle="modal" data-bs-target='#editUser-{{$sysUser["id"]}}' class="btn btn-warning">EDITAR</a>
-                  <form class="d-inline" action='user/{{$sysUser["id"]}}' method="POST">
+                  <a data-bs-toggle="modal" data-bs-target='#deleteUser-{{$sysUser["id"]}}' class="btn btn-danger">DELETAR</a>
+                  <!-- <form class="d-inline" action='user/{{$sysUser["id"]}}' method="POST"> 
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">EXCLUIR</button>
+                    <button class="btn btn-danger">EXCLUIR</button> -->
                   </form>
                 </div>
               </td>
@@ -126,6 +127,29 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
                       <button type="submit" class="btn btn-primary">ATUALIZAR</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- DELETAR USUÁRIO -->
+            <div class="modal fade" id='deleteUser-{{$sysUser["id"]}}' tabindex="-1" aria-labelledby="deletar" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que quer excluir este usuário?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  
+                  <p class="text-muted text-center mt-2">Id: <b>{{$sysUser["id"]}}</b><br>Nome: <b>{{$sysUser["name"]}}</b></p>
+                  <form action='user/{{$sysUser["id"]}}' method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-footer justify-content-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                      <button type="submit" class="btn btn-danger">EXCLUIR</button>
                     </div>
                   </form>
                 </div>

@@ -8,14 +8,25 @@ use Illuminate\Support\Facades\Http;
 class PostController extends Controller
 {
     public function addCustomer(Request $newCustomer){
-        $responseCustomer = Http::post('http://127.0.0.1:8000/api/customer',
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 2){
+            $url = 'company';
+        }
+        $responseCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/'.$url.'/customer',
         ['name'=> $newCustomer->name, 'email'=> $newCustomer->email,
-         'phone'=> $newCustomer->phone, 'website'=> $newCustomer->website, 'user_id'=> 10]);
+         'phone'=> $newCustomer->phone, 'website'=> $newCustomer->website, 'user_id'=> session()->get('user_id')]);
         return redirect()->back()->with('msg','Cliente adicionado com sucesso');
     }
 
     public function addUser(Request $newUser){
-        $responseUser = Http::post('http://127.0.0.1:8000/api/user',
+        $token = session()->get('btoken');
+        $responseUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/company/user',
         ['name'=> $newUser->name,'email'=>$newUser->email,
         'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>$newUser->role,'password'=>$newUser->password]);
         return redirect()->back()->with('msg','Usuário adicionado com sucesso');
@@ -25,7 +36,7 @@ class PostController extends Controller
         $responseInspection = Http::post('http://127.0.0.1:8000/api/inspection',
         ['title'=>$newInspection->title,'description'=>$newInspection->description,
         'start_date'=>date("y-m-d"),'end_date'=>date("y-m-d"), 
-        'is_finished'=>0,'customer_id'=>$newInspection->customer,'user_id'=>12]);
+        'is_finished'=>0,'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id')]);
         return redirect()->back();
     }
     /*Tirar o end_date depois, o end_date será nullable e será preenchido no backend

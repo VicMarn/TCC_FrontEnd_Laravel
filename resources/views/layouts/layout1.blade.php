@@ -22,6 +22,26 @@
                 <img src="/img/logoF.png" alt="Blastoize-logo" width="50" class="fluid-img">
                 <img src="/img/magnet.png" alt="" width="80">
             </a>
+
+            <!-- Dropdown do usuário logado -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/img/logedUser.svg" height="30" alt="Imagem de usuário">
+                </button>
+                <ul class="dropdown-menu text-center">
+                    <li><span class="dropdown-item-text">Id: {{session()->get('user_id')}}</span></li>
+                    <li><span class="dropdown-item-text">Função: {{session()->get('role')}}</span></li>
+                    <li>
+                        <form action="/logout" method="POST"> 
+                            @csrf
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-primary">Logout</button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+               
             <!--Toggle button-->
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#top-nav">
                 <span class="navbar-toggler-icon"></span>
@@ -39,9 +59,11 @@
                     <li class="nav-item text-center">
                         <a href="/inspections" class="nav-link">Inspeções</a>
                     </li>
-                    <li class="nav-item text-center">
-                        <a href="/systemUsers" class="nav-link">Usuários</a>
-                    </li>
+                    @if(session()->get('role') == 2)
+                        <li class="nav-item text-center">
+                            <a href="/systemUsers" class="nav-link">Usuários</a>
+                        </li>
+                    @endif
                     <li class="nav-item text-center">
                         <a href="/aboutUs" class="nav-link">Sobre nós</a>
                     </li>

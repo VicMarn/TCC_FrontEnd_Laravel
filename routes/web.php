@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\UpdateController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,8 @@ Route::get('login',[MainController::class,'login']);
 
 Route::get('signup',[MainController::class,'signUp']);
 
+Route::get('signupPJ',[MainController::class,'signupPJ']);
+
 Route::get('customers',[MainController::class,'customers']);
 
 Route::get('inspections',[MainController::class,'inspections']);
@@ -35,6 +38,8 @@ Route::get('systemUsers',[MainController::class,'systemUsers']);
 Route::get('aboutUs',[MainController::class,'aboutUs']);
 
 Route::get('inspection/{id}', [MainController::class,'editInspection']);
+
+
 
 /*ROTAS DE POST*/
 Route::post('addCustomer', [PostController::class,'addCustomer']);
@@ -51,3 +56,8 @@ Route::delete('extinguisher/{id}',[DeleteController::class,'deleteExtinguisher']
 /*ROTAS DE PUT*/
 Route::put('customer/{id}',[UpdateController::class,'putCustomer']);
 Route::put('user/{id}',[UpdateController::class,'putUser']);
+
+/*ROTAS DE AUTH*/
+Route::post('/login2',[AuthController::class,'login']);
+Route::post('/logout',[AuthController::class,'logout']);
+Route::post('/register',[AuthController::class,'register']);
