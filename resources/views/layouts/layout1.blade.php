@@ -29,8 +29,8 @@
                     <img src="/img/logedUser.svg" height="30" alt="Imagem de usuário">
                 </button>
                 <ul class="dropdown-menu text-center">
-                    <li><span class="dropdown-item-text">Id: {{session()->get('user_id')}}</span></li>
-                    <li><span class="dropdown-item-text">Função: {{session()->get('role')}}</span></li>
+                    <li><span class="dropdown-item-text"><strong>Nome: </strong>{{session()->get('user_name')}}</span></li>
+                    <li><span class="dropdown-item-text"><strong>Função: </strong>{{session()->get('role')}}</span></li>
                     <li>
                         <form action="/logout" method="POST"> 
                             @csrf

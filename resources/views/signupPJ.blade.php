@@ -50,7 +50,7 @@
                         </div>
                     </form>
                     <hr>
-                    <p class="text-muted mt-2 mb-1">Já tem um conta?<a href="/login" class="text-decoration-none"> Fazer login</a></p>   
+                    <p class="text-muted mt-2 mb-1">Já tem um conta?<a href="/" class="text-decoration-none"> Fazer login</a></p>   
                     
                 </div>
             </div>

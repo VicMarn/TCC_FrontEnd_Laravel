@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\Http;
 class MainController extends Controller
 {
     public function menu(){
-        return view('menu');
+        if(session()->has('btoken')){
+            return view('/menu');
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     public function login(){
@@ -50,8 +55,21 @@ class MainController extends Controller
     }
 
     public function inspections(){
-        $inspections = Http::get('http://127.0.0.1:8000/api/inspections');
-        $inspectionsCustomers=Http::get('http://127.0.0.1:8000/api/customers');
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 2){
+            $url = 'company';
+        }
+        else{
+            $url = 'employee';
+        }
+        $inspections = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->get('http://127.0.0.1:8000/api/'.$url.'/inspections');
+        $inspectionsCustomers=Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
         $inspections = $inspections->json();
         $inspectionsCustomers = $inspectionsCustomers->json();
         return view('inspections')
@@ -64,7 +82,19 @@ class MainController extends Controller
     }
 
     public function editInspection($id){
-        $editInspection = Http::get('http://127.0.0.1:8000/api/inspection/'.$id);
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 2){
+            $url = 'company';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $editInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->get('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id);
         $editInspection = $editInspection->json();
         return view('newInspection')->with('inspection',$editInspection);
     }
@@ -86,7 +116,12 @@ class MainController extends Controller
     }
 
     public function aboutUs(){
-        return view('aboutUs');
+        if(session()->has('btoken')){
+            return view('aboutUs');
+        }
+        else{
+            return redirect('/');
+        }
     }
 
 }

@@ -14,12 +14,17 @@
         <div class="container">
             <div class="row justify-content-center"> 
                 <div class="col-11 col-sm-9 col-md-7 col-lg-5 border rounded-4 p-4 text-center bg-light">
+                    <div class="row">
+                        @if(session('authErrorMsg'))
+                        <p class="bg-danger text-center text-light">{{session('authErrorMsg')}}</p>
+                        @endif
+                    </div>
                     <form action="/login2" method="POST">
                         @csrf
                         <img src="/img/login.svg" height="50" alt="Ícone de login">
                         <h3>Login</h3>
                         <input name="email" type="email" class="form-control mb-3 d-inline" style="width:70%" placeholder="E-mail" required autofocus>
-                        <input name="password" type="password" class="form-control d-inline" style="width:70%" placeholder="Senha"> 
+                        <input name="password" type="password" class="form-control d-inline" style="width:70%" placeholder="Senha" required> 
                         <input type="submit" class="form-control btn btn-outline-primary mt-3 d-inline" style="width:70%" value="Login">
                     </form>
                     <p class="text-muted">Esqueceu sua senha?<a href="#" class="text-decoration-none"> Clique aqui</a></p>

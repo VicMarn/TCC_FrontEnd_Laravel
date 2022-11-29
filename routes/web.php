@@ -46,6 +46,8 @@ Route::post('addCustomer', [PostController::class,'addCustomer']);
 Route::post('addUser',[PostController::class,'addUser']);
 Route::post('addInspection',[PostController::class,'addInspection']);
 Route::post('/extinguisher/{id}',[PostController::class,'addExtinguisher']);
+Route::post('/inspection/{id}/finish',[PostController::class,'finish']);
+Route::post('/inspection/{id}/unfinished',[PostController::class,'unfinish']);
 
 /*ROTAS DE DELETE */
 Route::delete('customer/{id}',[DeleteController::class, 'deleteCustomer']);

@@ -28,15 +28,24 @@ class PostController extends Controller
         $responseUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->post('http://127.0.0.1:8000/api/company/user',
         ['name'=> $newUser->name,'email'=>$newUser->email,
-        'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>$newUser->role,'password'=>$newUser->password]);
+        'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>$newUser->role,'password'=>bcrypt($newUser->password),'created_by'=> session()->get('user_id')]);
         return redirect()->back()->with('msg','Usuário adicionado com sucesso');
     }
 
     public function addInspection(Request $newInspection){
-        $responseInspection = Http::post('http://127.0.0.1:8000/api/inspection',
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $responseInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection',
         ['title'=>$newInspection->title,'description'=>$newInspection->description,
-        'start_date'=>date("y-m-d"),'end_date'=>date("y-m-d"), 
-        'is_finished'=>0,'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id')]);
+        'start_date'=>date("y-m-d"), 'is_finished'=>0,
+        'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id')]);
         return redirect()->back();
     }
     /*Tirar o end_date depois, o end_date será nullable e será preenchido no backend
@@ -44,11 +53,49 @@ class PostController extends Controller
      automaticamente*/
 
      public function addExtinguisher(Request $newExtinguisher,$id){
-        $responseExtinguisher = Http::post('http://127.0.0.1:8000/api/extinguisher',[
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $responseExtinguisher = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/'.$url.'/extinguisher',[
         'name'=>$newExtinguisher->name,'type'=>$newExtinguisher->type,'weight'=>$newExtinguisher->weight,
         'inspection_seal_url_photo'=>$newExtinguisher->inspection_seal_url_photo,
         'extinguisher_url_photo'=>$newExtinguisher->extinguisher_url_photo,
         'description'=>$newExtinguisher->description,'is_approved'=>$newExtinguisher->is_approved,'inspection_id'=>$id]);
+        return redirect()->back();
+     }
+
+
+     public function finish($id){
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 2){
+            $url = 'company';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $responseFinish = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id.'/finish');
+        return redirect()->back();
+     }
+
+     public function unfinish($id){
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 2){
+            $url = 'company';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $responseUnfinish = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id.'/unfinished');
         return redirect()->back();
      }
 }

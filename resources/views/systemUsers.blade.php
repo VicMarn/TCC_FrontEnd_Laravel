@@ -162,7 +162,7 @@
   </div>
 
   
-  <!-- CADASTRAR CLIENTE -->
+  <!-- CADASTRAR USUÁRIO -->
   <div class="modal fade" id="sysUser_register" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -175,23 +175,23 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Nome usuário</label>
-              <input name="name" type="text" class="form-control" >
+              <input name="name" type="text" class="form-control" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Senha</label>
-              <input name="password" type="password" class="form-control" >
+              <input name="password" type="password" class="form-control" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
-              <input name="email" type="email" class="form-control" >
+              <input name="email" type="email" class="form-control" required>
             </div>
             <div class="mb-3">
               <label class="form-label">CPF/CNPJ</label>
-              <input name="cpf_cnpj" type="text" class="form-control" >
+              <input name="cpf_cnpj" type="text" class="form-control" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Função</label>
-              <input name="role" type="text" class="form-control" >
+              <input name="role" type="text" class="form-control" required>
             </div>
             <!--
             <div class="mb-3">

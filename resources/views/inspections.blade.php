@@ -10,10 +10,11 @@
       <h3 class="ms-2 mb-0">Inspeções</h3>
     </div>
     <hr>
-    <div class="my-2">
-      <a data-bs-toggle="modal" data-bs-target="#newInspModal" class="btn btn-primary mb-2">NOVA INSPEÇÃO</a>
-    </div>
-
+    @if(session()->get('role') != 2)
+      <div class="my-2">
+        <a data-bs-toggle="modal" data-bs-target="#newInspModal" class="btn btn-primary mb-2">NOVA INSPEÇÃO</a>
+      </div>
+    @endif
     <!-- TABELA -->
     <div class="table-responsive">
       <table class="table">
@@ -36,16 +37,46 @@
               <td class="text-center">{{$inspection["start_date"]}}</td>
               <td class="text-center">
                 <div class="col">
-                  <a href='inspection/{{$inspection["id"]}}' class="btn btn-primary">INSPECIONAR</a>
-                  <a data-bs-toggle="modal" data-bs-target="#inspection_details" class="btn btn-success">VISUALIZAR</a>
-                  <form action='inspection/{{$inspection["id"]}}' method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger">EXCLUIR</button>
-                  </form>
+                  @if($inspection["is_finished"] == 0)
+                    <a href='inspection/{{$inspection["id"]}}' class="btn btn-primary">INSPECIONAR</a>
+                  @else
+                    <a href='inspection/{{$inspection["id"]}}' class="btn btn-success">VISUALIZAR</a>
+                  @endif
+                  <!-- <a data-bs-toggle="modal" data-bs-target="#inspection_details" class="btn btn-success">VISUALIZAR</a> -->
+                  @if(session()->get('role') != 2)
+                    <button data-bs-toggle="modal" data-bs-target='#deleteInspection-{{$inspection["id"]}}' class="btn btn-danger">EXCLUIR</button>
+                    <!-- <form action='inspection/{{$inspection["id"]}}' method="POST" class="d-inline"> 
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger">EXCLUIR</button>
+                    </form>-->
+                  @endif
                 </div>
               </td>
             </tr>
+
+
+            <!-- DELETAR INSPEÇÃO -->
+            <div class="modal fade" id='deleteInspection-{{$inspection["id"]}}' tabindex="-1" aria-labelledby="deletar" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que quer excluir esta inspeção?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  
+                  <p class="text-muted text-center mt-2">Id: <b>{{$inspection["id"]}}</b><br>Título: <b>{{$inspection["title"]}}</b></p>
+                  <form action='inspection/{{$inspection["id"]}}' method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-footer justify-content-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+                      <button type="submit" class="btn btn-danger">EXCLUIR</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           @endforeach
         </tbody>
       </table>
@@ -97,75 +128,6 @@
             <button type="submit" class="btn btn-primary">CADASTRAR</button>
           </div>
         </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Visualizar inspeção -->
-  <div class="modal fade" id="inspection_details" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">INSPEÇÃO 00X</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="card mt-2">
-            <div class="card-body">
-              <h5 class="card-title">Informações Gerais</h5>
-              <hr>
-              <div class="mb-3">
-                <label class="form-label">Cliente inspecionado</label>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Selecionar cliente</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Título da Inspeção</label>
-                <input class="form-control" type="text">
-              </div>
-            </div>
-          </div>
-
-          <div class="card mt-2">
-            <div class="card-body">
-              <h5 class="card-title">Equipamentos</h5>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Ação</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Extintor do Hall</td>
-                    <td>Co2</td>
-                    <td>O extintor precisa ser trocado, pois ja pasosu da validade</td>
-                    <td>APROVADO</td>
-                    <td>
-                      <div class="col">
-                        <a href="" class="btn btn-success">VISUALIZAR</a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
-          <button type="button" class="btn btn-primary">CADASTRAR</button>
-        </div>
       </div>
     </div>
   </div>

@@ -180,19 +180,19 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Nome cliente</label>
-              <input name="name" type="text" class="form-control" id="exampleFormControlInput1" >
+              <input name="name" type="text" class="form-control" id="exampleFormControlInput1" required>
             </div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Email</label>
-              <input name="email" type="email" class="form-control" id="exampleFormControlInput1" >
+              <input name="email" type="email" class="form-control" id="exampleFormControlInput1" required>
             </div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
-              <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" >
+              <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" required>
             </div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
-              <input name="website" type="text" class="form-control" id="exampleFormControlInput1" >
+              <input name="website" type="text" class="form-control" id="exampleFormControlInput1" required>
             </div>
             <!--
             <div class="mb-3">

@@ -29,12 +29,30 @@ class DeleteController extends Controller
     }
 
     public function deleteInspection($id){
-        $delInspection = Http::delete('http://127.0.0.1:8000/api/inspection/'.$id);
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $delInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->delete('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id);
         return redirect()->back();
     }
 
     public function deleteExtinguisher($id){
-        $delExtinguisher = Http::delete('http://127.0.0.1:8000/api/extinguisher/'.$id);
+        $token = session()->get('btoken');
+        $role = session()->get('role');
+        if($role == 1){
+            $url = 'inspector';
+        }
+        else if($role == 3){
+            $url = 'employee';
+        }
+        $delExtinguisher = Http::withHeaders(['Authorization' => "Bearer ".$token])
+        ->delete('http://127.0.0.1:8000/api/'.$url.'/extinguisher/'.$id);
         return redirect()->back();
     }
 }

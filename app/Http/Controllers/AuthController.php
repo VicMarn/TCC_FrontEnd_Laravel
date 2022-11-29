@@ -16,12 +16,17 @@ class AuthController extends Controller
         $loginCheck = Http::post('http://127.0.0.1:8000/api/login',[
            'email' => $loginInfo->email, 'password' => $loginInfo->password 
         ]);
+        if($loginCheck->status() == 401){
+            return redirect()->back()->with('authErrorMsg','Credenciais incorretas');
+        }
         $user_id = $loginCheck->object()->user->id;
         $token = $loginCheck->object()->token;
         $role = $loginCheck->object()->user->role;
+        $user_name = $loginCheck->object()->user->name;
         session()->put('user_id',$user_id);
         session()->put('btoken',$token);
         session()->put('role',$role);
+        session()->put('user_name',$user_name);
         return redirect('/menu');
     }
 
@@ -32,17 +37,27 @@ class AuthController extends Controller
         session()->flush();
         return redirect('/');
     }
-    /*
-    public function setCookie(){
-        $resp = new Response("resp");
-        $resp->withCookie(cookie()->forever('btoken',$GLOBALS['token']));
-        return $resp;
 
-    }
+    public function register(Request $registerInfo){
+        $registerResponse = Http::post('http://127.0.0.1:8000/api/register',['name'=>$registerInfo->name,
+        'email'=>$registerInfo->email,'password'=>$registerInfo->password,'cpf_cnpj'=> $registerInfo->cpf_cnpj,
+        'email_confirmation'=>$registerInfo->email_confirmation,'password_confirmation'=>$registerInfo->password_confirmation]);
+        if($registerResponse->status() == 201){
+            $user_id = $registerResponse->object()->user->id;
+            $token = $registerResponse->object()->token;
+            //$role = $registerResponse->object()->user->role;
+            $user_name = $registerResponse->object()->user->name;
+            session()->put('user_id',$user_id);
+            session()->put('btoken',$token);
+            //session()->put('role',$role);
+            session()->put('user_name',$user_name);
+            return redirect('/menu');
 
-    public function getCookie(Request $request){
-        $value = $request->cookie('btoken');
-        return $value;
+        }
+        else{
+            return redirect()->back()->with('registerErrorMsg','Erro de preenchimento de formulário');
+        }
+        
     }
-    */
+   
 }
