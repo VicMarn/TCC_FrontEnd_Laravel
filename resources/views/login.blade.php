@@ -30,14 +30,15 @@
                     <p class="text-muted">Esqueceu sua senha?<a href="#" class="text-decoration-none"> Clique aqui</a></p>
                     <hr class="mb-2 mt-0">
                     <p class="text-muted mt-2 mb-1">Novo usuário?</p>
-                    <a data-bs-toggle="modal" data-bs-target="#chooseUserType" class="text-decoration-none">
-                        <button class="btn btn-outline-secondary form-control d-inline" style="width:70%">Criar conta</button>
+                    <a href="/signup" class="text-decoration-none btn btn-outline-secondary" style="width:70%">
+                        Criar conta
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 
     <div class="modal fade" id="chooseUserType" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -57,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="/js/bootstrap.bundle.min.js"></script>
  </body>

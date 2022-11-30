@@ -24,10 +24,6 @@ class MainController extends Controller
         return view('signup');
     }
 
-    public function signupPJ(){
-        return view('signupPJ');
-    }
-
     /*
     public function customers(){
         $customers = Http::get('http://127.0.0.1:8000/api/customers');

@@ -41,15 +41,16 @@ class AuthController extends Controller
     public function register(Request $registerInfo){
         $registerResponse = Http::post('http://127.0.0.1:8000/api/register',['name'=>$registerInfo->name,
         'email'=>$registerInfo->email,'password'=>$registerInfo->password,'cpf_cnpj'=> $registerInfo->cpf_cnpj,
-        'email_confirmation'=>$registerInfo->email_confirmation,'password_confirmation'=>$registerInfo->password_confirmation]);
+        'email_confirmation'=>$registerInfo->email_confirmation,'password_confirmation'=>$registerInfo->password_confirmation,
+        'role'=>$registerInfo->cpf_cnpj_selector]);
         if($registerResponse->status() == 201){
             $user_id = $registerResponse->object()->user->id;
             $token = $registerResponse->object()->token;
-            //$role = $registerResponse->object()->user->role;
+            $role = $registerResponse->object()->user->role;
             $user_name = $registerResponse->object()->user->name;
             session()->put('user_id',$user_id);
             session()->put('btoken',$token);
-            //session()->put('role',$role);
+            session()->put('role',$role);
             session()->put('user_name',$user_name);
             return redirect('/menu');
 

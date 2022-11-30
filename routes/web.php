@@ -25,8 +25,6 @@ Route::get('menu',[MainController::class,'menu']);
 
 Route::get('signup',[MainController::class,'signUp']);
 
-Route::get('signupPJ',[MainController::class,'signupPJ']);
-
 Route::get('customers',[MainController::class,'customers']);
 
 Route::get('inspections',[MainController::class,'inspections']);
