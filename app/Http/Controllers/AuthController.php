@@ -13,7 +13,7 @@ class AuthController extends Controller
     
 
     public function login(Request $loginInfo){
-        $loginCheck = Http::post('http://127.0.0.1:8000/api/login',[
+        $loginCheck = Http::post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/login',[
            'email' => $loginInfo->email, 'password' => $loginInfo->password 
         ]);
         if($loginCheck->status() == 401){
@@ -35,13 +35,13 @@ class AuthController extends Controller
     public function logout(){
         $token = session()->get('btoken');
         $logoutResponse = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/logout');
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/logout');
         session()->flush();
         return redirect('/');
     }
 
     public function register(Request $registerInfo){
-        $registerResponse = Http::post('http://127.0.0.1:8000/api/register',['name'=>$registerInfo->name,
+        $registerResponse = Http::post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/register',['name'=>$registerInfo->name,
         'email'=>$registerInfo->email,'password'=>$registerInfo->password,'cpf_cnpj'=> $registerInfo->cpf_cnpj,
         'email_confirmation'=>$registerInfo->email_confirmation,'password_confirmation'=>$registerInfo->password_confirmation,
         'role'=>$registerInfo->cpf_cnpj_selector,'company_id'=>rand(100,99999)]);

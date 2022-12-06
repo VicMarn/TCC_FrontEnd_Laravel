@@ -7,11 +7,6 @@
   <?php 
     $count = 0;
   ?>
-  <div class="row">
-    @if(session('msg'))
-      <p class="bg-success text-center text-light">{{session('msg')}}</p>
-    @endif
-  </div>
   <div class="container mt-4 rounded-4 shadow p-3">
     <div class="d-flex align-items-end text-start">
       <img src="/img/clientes.svg" height="40" alt="Ícone Clientes">
@@ -185,7 +180,7 @@
           <h5 class="modal-title" id="exampleModalLabel">CADASTRAR CLIENTE</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="addCustomer" method="POST">
+        <form action="addCustomer" method="POST" onsubmit="clearFormatPhone()">
           @csrf
           <div class="modal-body">
             <div class="mb-3">
@@ -198,7 +193,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Telefone cliente</label>
-              <input name="phone" type="text" class="form-control" id="exampleFormControlInput1" required>
+              <input name="phone" id="phoneInput" type="text" class="form-control" id="exampleFormControlInput1" oninput="phoneMask()" required>
             </div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Rede social/Site</label>
@@ -219,6 +214,22 @@
     </div>
   </div>
 
+  <script>
+    function phoneMask(){
+      let valor = document.getElementById('phoneInput').value;
+      document.getElementById('phoneInput').value = valor.replace(/\D/g,'')
+                                                       .replace(/(\d{2})(\d)/, '($1) $2')
+                                                       .replace(/(\d{5})(\d)/, '$1-$2')
+                                                       .replace(/(-\d{4})\d+?$/, '$1');
+    }
 
+    function clearFormatPhone(){
+            let valorOriginal = document.getElementById('phoneInput').value;
+            let regex = /\d/g;
+            let valorFiltrado = valorOriginal.match(regex);
+            document.getElementById('phoneInput').value = valorFiltrado.join("");
+        }                                                   
+        
+  </script>
   
 @endsection

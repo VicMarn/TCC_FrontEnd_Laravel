@@ -7,11 +7,6 @@
   <?php 
     $count = 0;
   ?>
-  <div class="row">
-    @if(session('msg'))
-      <p class="bg-success text-center text-light">{{session('msg')}}</p>
-    @endif
-  </div>
   <div class="container mt-4 rounded-4 shadow p-3">
     <div class="d-flex align-items-end text-left">
       <img src="/img/user.svg" height="40" alt="Ícone inspeção">
@@ -112,33 +107,20 @@
                       <div class="modal-body">
                         <div class="mb-3">
                           <label class="form-label">Nome usuário</label>
-                          <input type="text" name="name" class="form-control" value='{{$sysUser["name"]}}'>
+                          <input type="text" name="name" class="form-control" value='{{$sysUser["name"]}}' required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Email</label>
-                          <input type="email" name="email" class="form-control" value='{{$sysUser["email"]}}'>
+                          <input type="email" name="email" class="form-control" value='{{$sysUser["email"]}}' required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">CPF</label>
-                          <input type="text" name="cpf_cnpj" class="form-control" value='{{$sysUser["cpf_cnpj"]}}'>
+                          <input type="text" name="cpf_cnpj" class="form-control" value='{{$sysUser["cpf_cnpj"]}}' required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Função</label>
                           <!-- <input type="text" name="role" class="form-control" value='{{$sysUser["role"]}}'> -->
                           <select name="role" class="form-control" required>
-                            <option value='{{$sysUser["role"]}}'>@switch($sysUser["role"])
-                                  @case('1')
-                                      Inspetor
-                                      @break
-                                  @case('2')
-                                      Empresa
-                                      @break
-                                  @case('3')
-                                      Funcionário
-                                      @break
-                              @endswitch</option>
-                            <option value="1">Inspetor</option>
-                            <option value="2">Empresa</option>
                             <option value="3">Funcionário</option>
                           </select>
                         </div>

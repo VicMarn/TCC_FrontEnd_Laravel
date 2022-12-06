@@ -46,7 +46,7 @@ class MainController extends Controller
                 $url = 'employee';
             }
             $customers = Http::withHeaders(['Authorization' => "Bearer ".$token])
-            ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
+            ->get('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/customers');
             $customers = $customers->json();
             return view('customers')->with('customers', $customers);
         }
@@ -69,9 +69,9 @@ class MainController extends Controller
                 $url = 'employee';
             }
             $inspections = Http::withHeaders(['Authorization' => "Bearer ".$token])
-            ->get('http://127.0.0.1:8000/api/'.$url.'/inspections');
+            ->get('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspections');
             $inspectionsCustomers=Http::withHeaders(['Authorization' => "Bearer ".$token])
-            ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
+            ->get('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/customers');
             $inspections = $inspections->json();
             $inspectionsCustomers = $inspectionsCustomers->json();
             return view('inspections')
@@ -100,7 +100,7 @@ class MainController extends Controller
             $url = 'employee';
         }
         $editInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->get('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id);
+        ->get('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspection/'.$id);
         $editInspection = $editInspection->json();
         return view('newInspection')->with('inspection',$editInspection);
     }
@@ -117,7 +117,7 @@ class MainController extends Controller
         if(session()->has('btoken')){
             $token = session()->get('btoken');
             $sysUsers = Http::withHeaders(['Authorization' => "Bearer ".$token])
-            ->get('http://127.0.0.1:8000/api/company/users');
+            ->get('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/company/users');
             if($sysUsers->status() == 403){
                 return redirect()->back();
             }

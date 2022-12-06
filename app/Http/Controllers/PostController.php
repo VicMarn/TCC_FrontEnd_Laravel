@@ -17,21 +17,21 @@ class PostController extends Controller
             $url = 'company';
         }
         $responseCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/'.$url.'/customer',
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/customer',
         ['name'=> $newCustomer->name, 'email'=> $newCustomer->email,
          'phone'=> $newCustomer->phone, 'website'=> $newCustomer->website, 'user_id'=> session()->get('user_id'),
          'company_id'=>session()->get('company_id')]);
-        return redirect()->back()->with('msg','Cliente adicionado com sucesso');
+        return redirect()->back();
     }
 
     public function addUser(Request $newUser){
         $token = session()->get('btoken');
         $responseUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/company/user',
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/company/user',
         ['name'=> $newUser->name,'email'=>$newUser->email,
         'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>3,'password'=>bcrypt($newUser->password),'created_by'=> session()->get('user_id'),
         'company_id'=>session()->get('company_id')]);
-        return redirect()->back()->with('msg','Usuário adicionado com sucesso');
+        return redirect()->back();
     }
 
     public function addInspection(Request $newInspection){
@@ -44,7 +44,7 @@ class PostController extends Controller
             $url = 'employee';
         }
         $responseInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection',
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspection',
         ['title'=>$newInspection->title,'description'=>$newInspection->description,
         'start_date'=>date("y-m-d"), 'is_finished'=>0,
         'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id'),
@@ -85,7 +85,7 @@ class PostController extends Controller
         }
         //parte nova
         $responseExtinguisher = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/'.$url.'/extinguisher',[
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/extinguisher',[
         'name'=>$newExtinguisher->name,'type'=>$newExtinguisher->type,'weight'=>$newExtinguisher->weight,
         'inspection_seal_url_photo'=>$newExtinguisher->inspection_seal_url_photo,
         'extinguisher_url_photo'=>$newExtinguisher->extinguisher_url_photo,
@@ -107,7 +107,7 @@ class PostController extends Controller
             $url = 'employee';
         }
         $responseFinish = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id.'/finish');
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspection/'.$id.'/finish');
         return redirect()->back();
      }
 
@@ -124,7 +124,7 @@ class PostController extends Controller
             $url = 'employee';
         }
         $responseUnfinish = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->post('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id.'/unfinished');
+        ->post('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspection/'.$id.'/unfinished');
         return redirect()->back();
      }
 }

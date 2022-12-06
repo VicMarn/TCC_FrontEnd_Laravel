@@ -17,14 +17,14 @@ class DeleteController extends Controller
             $url = 'company';
         }
         $delCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->delete('http://127.0.0.1:8000/api/'.$url.'/customer/'.$id);
+        ->delete('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/customer/'.$id);
         return redirect()->back();
     }
 
     public function deleteUser($id){
         $token = session()->get('btoken');
         $delUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->delete('http://127.0.0.1:8000/api/company/user/'.$id);
+        ->delete('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/company/user/'.$id);
         return redirect()->back();
     }
 
@@ -38,7 +38,7 @@ class DeleteController extends Controller
             $url = 'employee';
         }
         $delInspection = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->delete('http://127.0.0.1:8000/api/'.$url.'/inspection/'.$id);
+        ->delete('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/inspection/'.$id);
         return redirect()->back();
     }
 
@@ -52,7 +52,7 @@ class DeleteController extends Controller
             $url = 'employee';
         }
         $delExtinguisher = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->delete('http://127.0.0.1:8000/api/'.$url.'/extinguisher/'.$id);
+        ->delete('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/extinguisher/'.$id);
         return redirect()->back();
     }
 }

@@ -177,7 +177,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 
-                                <p class="text-muted text-center mt-2">Id: <b>{{$extinguisher["id"]}}</b><br>Nome: <b>{{$extinguisher["name"]}}</b></p>
+                                <p class="text-muted text-center mt-2">Nome: <b>{{$extinguisher["name"]}}</b></p>
                                 <form action='/extinguisher/{{$extinguisher["id"]}}' method="POST">
                                     @csrf
                                     @method('DELETE')

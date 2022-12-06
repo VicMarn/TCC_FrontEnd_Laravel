@@ -17,7 +17,7 @@ class UpdateController extends Controller
             $url = 'company';
         }
         $responseCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->put('http://127.0.0.1:8000/api/'.$url.'/customer/'.$id,
+        ->put('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/'.$url.'/customer/'.$id,
         ['name'=> $putCustomer->name, 'email'=>$putCustomer->email,
         'phone'=> $putCustomer->phone, 'website'=>$putCustomer->website, 'user_id' => session()->get('user_id')]);
         return redirect()->back();
@@ -27,7 +27,7 @@ class UpdateController extends Controller
     public function putUser(Request $putUser,$id){
         $token = session()->get('btoken');
         $responseUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->put('http://127.0.0.1:8000/api/company/user/'.$id,
+        ->put('http://apiblastoiz-env.eba-5xvdmybp.us-east-1.elasticbeanstalk.com/api/company/user/'.$id,
         ['name'=> $putUser->name,'email'=>$putUser->email,
         'cpf_cnpj'=>$putUser->cpf_cnpj, 'role'=>$putUser->role]);
         return redirect()->back();
