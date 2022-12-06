@@ -288,11 +288,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Foto do extintor</label>
-                            <input name="extinguisher_url_photo" class="form-control" type="file" required>
+                            <input name="extinguisher_url_photo" class="form-control" type="file" accept=".jpg, .jpeg, .png" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Foto do selo do extintor</label>
-                            <input name="inspection_seal_url_photo" class="form-control" type="file" required>
+                            <input name="inspection_seal_url_photo" class="form-control" type="file" accept=".jpg, .jpeg, .png" required>
                         </div>
                     </div>
                     <div class="modal-footer">
