@@ -23,10 +23,12 @@ class AuthController extends Controller
         $token = $loginCheck->object()->token;
         $role = $loginCheck->object()->user->role;
         $user_name = $loginCheck->object()->user->name;
+        $company_id = $loginCheck->object()->user->company_id;
         session()->put('user_id',$user_id);
         session()->put('btoken',$token);
         session()->put('role',$role);
         session()->put('user_name',$user_name);
+        session()->put('company_id',$company_id);
         return redirect('/menu');
     }
 
@@ -42,16 +44,18 @@ class AuthController extends Controller
         $registerResponse = Http::post('http://127.0.0.1:8000/api/register',['name'=>$registerInfo->name,
         'email'=>$registerInfo->email,'password'=>$registerInfo->password,'cpf_cnpj'=> $registerInfo->cpf_cnpj,
         'email_confirmation'=>$registerInfo->email_confirmation,'password_confirmation'=>$registerInfo->password_confirmation,
-        'role'=>$registerInfo->cpf_cnpj_selector]);
+        'role'=>$registerInfo->cpf_cnpj_selector,'company_id'=>rand(100,99999)]);
         if($registerResponse->status() == 201){
             $user_id = $registerResponse->object()->user->id;
             $token = $registerResponse->object()->token;
             $role = $registerResponse->object()->user->role;
             $user_name = $registerResponse->object()->user->name;
+            $company_id = $registerResponse->object()->user->company_id;
             session()->put('user_id',$user_id);
             session()->put('btoken',$token);
             session()->put('role',$role);
             session()->put('user_name',$user_name);
+            session()->put('company_id',$company_id);
             return redirect('/menu');
 
         }

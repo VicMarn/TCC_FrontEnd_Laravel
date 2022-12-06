@@ -19,7 +19,8 @@ class PostController extends Controller
         $responseCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->post('http://127.0.0.1:8000/api/'.$url.'/customer',
         ['name'=> $newCustomer->name, 'email'=> $newCustomer->email,
-         'phone'=> $newCustomer->phone, 'website'=> $newCustomer->website, 'user_id'=> session()->get('user_id')]);
+         'phone'=> $newCustomer->phone, 'website'=> $newCustomer->website, 'user_id'=> session()->get('user_id'),
+         'company_id'=>session()->get('company_id')]);
         return redirect()->back()->with('msg','Cliente adicionado com sucesso');
     }
 
@@ -28,7 +29,8 @@ class PostController extends Controller
         $responseUser = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->post('http://127.0.0.1:8000/api/company/user',
         ['name'=> $newUser->name,'email'=>$newUser->email,
-        'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>$newUser->role,'password'=>bcrypt($newUser->password),'created_by'=> session()->get('user_id')]);
+        'cpf_cnpj'=>$newUser->cpf_cnpj,'role'=>3,'password'=>bcrypt($newUser->password),'created_by'=> session()->get('user_id'),
+        'company_id'=>session()->get('company_id')]);
         return redirect()->back()->with('msg','Usuário adicionado com sucesso');
     }
 
@@ -45,7 +47,8 @@ class PostController extends Controller
         ->post('http://127.0.0.1:8000/api/'.$url.'/inspection',
         ['title'=>$newInspection->title,'description'=>$newInspection->description,
         'start_date'=>date("y-m-d"), 'is_finished'=>0,
-        'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id')]);
+        'customer_id'=>$newInspection->customer,'user_id'=>session()->get('user_id'),
+        'company_id'=>session()->get('company_id')]);
         return redirect()->back();
     }
     /*Tirar o end_date depois, o end_date será nullable e será preenchido no backend
@@ -61,6 +64,26 @@ class PostController extends Controller
         else if($role == 3){
             $url = 'employee';
         }
+        //parte nova
+        if($newExtinguisher->hasFile('extinguisher_url_photo') and $newExtinguisher->file('extinguisher_url_photo')->isValid()){
+            $extension = $newExtinguisher->extinguisher_url_photo->extension();
+            $imageName = md5($newExtinguisher->extinguisher_url_photo->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $newExtinguisher->extinguisher_url_photo->move(public_path('img/extinguishers'),$imageName);
+
+            $newExtinguisher->extinguisher_url_photo = $imageName;
+        }
+
+        if($newExtinguisher->hasFile('inspection_seal_url_photo') and $newExtinguisher->file('inspection_seal_url_photo')->isValid()){
+            $extension2 = $newExtinguisher->inspection_seal_url_photo->extension();
+
+            $imageName2 = md5($newExtinguisher->inspection_seal_url_photo->getClientOriginalName() . strtotime("now")) . "." . $extension2;
+
+            $newExtinguisher->inspection_seal_url_photo->move(public_path('img/extinguishers'),$imageName2);
+
+            $newExtinguisher->inspection_seal_url_photo = $imageName2;
+        }
+        //parte nova
         $responseExtinguisher = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->post('http://127.0.0.1:8000/api/'.$url.'/extinguisher',[
         'name'=>$newExtinguisher->name,'type'=>$newExtinguisher->type,'weight'=>$newExtinguisher->weight,
@@ -77,6 +100,9 @@ class PostController extends Controller
         if($role == 2){
             $url = 'company';
         }
+        else if($role == 1){
+            $url = 'inspector';
+        }
         else if($role == 3){
             $url = 'employee';
         }
@@ -90,6 +116,9 @@ class PostController extends Controller
         $role = session()->get('role');
         if($role == 2){
             $url = 'company';
+        }
+        else if($role == 1){
+            $url = 'inspector';
         }
         else if($role == 3){
             $url = 'employee';

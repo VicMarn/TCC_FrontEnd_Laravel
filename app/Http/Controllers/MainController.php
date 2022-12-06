@@ -33,44 +33,54 @@ class MainController extends Controller
     */
 
     public function customers(){
-        $token = session()->get('btoken');
-        $role = session()->get('role');
-        if($role == 1){
-            $url = 'inspector';
-        }
-        else if($role == 2){
-            $url = 'company';
+        if(session()->has('btoken')){
+            $token = session()->get('btoken');
+            $role = session()->get('role');
+            if($role == 1){
+                $url = 'inspector';
+            }
+            else if($role == 2){
+                $url = 'company';
+            }
+            else{
+                $url = 'employee';
+            }
+            $customers = Http::withHeaders(['Authorization' => "Bearer ".$token])
+            ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
+            $customers = $customers->json();
+            return view('customers')->with('customers', $customers);
         }
         else{
-            $url = 'employee';
+            return redirect('/');
         }
-        $customers = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
-        $customers = $customers->json();
-        return view('customers')->with('customers', $customers);
     }
 
     public function inspections(){
-        $token = session()->get('btoken');
-        $role = session()->get('role');
-        if($role == 1){
-            $url = 'inspector';
-        }
-        else if($role == 2){
-            $url = 'company';
+        if(session()->has('btoken')){
+            $token = session()->get('btoken');
+            $role = session()->get('role');
+            if($role == 1){
+                $url = 'inspector';
+            }
+            else if($role == 2){
+                $url = 'company';
+            }
+            else{
+                $url = 'employee';
+            }
+            $inspections = Http::withHeaders(['Authorization' => "Bearer ".$token])
+            ->get('http://127.0.0.1:8000/api/'.$url.'/inspections');
+            $inspectionsCustomers=Http::withHeaders(['Authorization' => "Bearer ".$token])
+            ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
+            $inspections = $inspections->json();
+            $inspectionsCustomers = $inspectionsCustomers->json();
+            return view('inspections')
+                ->with('inspections',$inspections)
+                ->with('inspCustomers', $inspectionsCustomers);
         }
         else{
-            $url = 'employee';
+            return redirect('/');
         }
-        $inspections = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->get('http://127.0.0.1:8000/api/'.$url.'/inspections');
-        $inspectionsCustomers=Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->get('http://127.0.0.1:8000/api/'.$url.'/customers');
-        $inspections = $inspections->json();
-        $inspectionsCustomers = $inspectionsCustomers->json();
-        return view('inspections')
-            ->with('inspections',$inspections)
-            ->with('inspCustomers', $inspectionsCustomers);
     }   
 
     public function newInspection(){
@@ -104,11 +114,21 @@ class MainController extends Controller
     */
 
     public function systemUsers(){
-        $token = session()->get('btoken');
-        $sysUsers = Http::withHeaders(['Authorization' => "Bearer ".$token])
-        ->get('http://127.0.0.1:8000/api/company/users');
-        $sysUsers= $sysUsers->json();
-        return view('systemUsers')->with('sysUsers',$sysUsers);
+        if(session()->has('btoken')){
+            $token = session()->get('btoken');
+            $sysUsers = Http::withHeaders(['Authorization' => "Bearer ".$token])
+            ->get('http://127.0.0.1:8000/api/company/users');
+            if($sysUsers->status() == 403){
+                return redirect()->back();
+            }
+            else{
+                $sysUsers= $sysUsers->json();
+                return view('systemUsers')->with('sysUsers',$sysUsers);
+            }
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     public function aboutUs(){

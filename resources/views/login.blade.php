@@ -19,7 +19,7 @@
                         <p class="bg-danger text-center text-light">{{session('authErrorMsg')}}</p>
                         @endif
                     </div>
-                    <form action="/login2" method="POST">
+                    <form action="/login2" method="POST" class="mb-4">
                         @csrf
                         <img src="/img/login.svg" height="50" alt="Ícone de login">
                         <h3>Login</h3>
@@ -27,7 +27,7 @@
                         <input name="password" type="password" class="form-control d-inline" style="width:70%" placeholder="Senha" required> 
                         <input type="submit" class="form-control btn btn-outline-primary mt-3 d-inline" style="width:70%" value="Login">
                     </form>
-                    <p class="text-muted">Esqueceu sua senha?<a href="#" class="text-decoration-none"> Clique aqui</a></p>
+                    <!-- <p class="text-muted">Esqueceu sua senha?<a href="#" class="text-decoration-none"> Clique aqui</a></p> -->
                     <hr class="mb-2 mt-0">
                     <p class="text-muted mt-2 mb-1">Novo usuário?</p>
                     <a href="/signup" class="text-decoration-none btn btn-outline-secondary" style="width:70%">

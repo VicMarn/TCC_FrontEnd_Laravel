@@ -1,3 +1,8 @@
+<?php header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+      header("Pragma: no-cache"); // HTTP 1.0.
+      header("Expires: 0"); // Proxies.
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -30,7 +35,20 @@
                 </button>
                 <ul class="dropdown-menu text-center">
                     <li><span class="dropdown-item-text"><strong>Nome: </strong>{{session()->get('user_name')}}</span></li>
-                    <li><span class="dropdown-item-text"><strong>Função: </strong>{{session()->get('role')}}</span></li>
+                    <li><span class="dropdown-item-text"><strong>Função: </strong>
+                            @switch(session()->get('role'))
+                                @case('1')
+                                    Inspetor
+                                    @break
+                                @case('2')
+                                    Empresa
+                                    @break
+                                @case('3')
+                                    Funcionário(a)
+                                    @break
+                            @endswitch
+                        </span>
+                    </li>
                     <li>
                         <form action="/logout" method="POST"> 
                             @csrf

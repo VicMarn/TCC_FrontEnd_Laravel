@@ -19,7 +19,7 @@ class UpdateController extends Controller
         $responseCustomer = Http::withHeaders(['Authorization' => "Bearer ".$token])
         ->put('http://127.0.0.1:8000/api/'.$url.'/customer/'.$id,
         ['name'=> $putCustomer->name, 'email'=>$putCustomer->email,
-        'phone'=> $putCustomer->phone, 'website'=>$putCustomer->website, 'user_id' => 10]);
+        'phone'=> $putCustomer->phone, 'website'=>$putCustomer->website, 'user_id' => session()->get('user_id')]);
         return redirect()->back();
         
     }

@@ -3,6 +3,10 @@
 @section('title','Blastoiz | Clientes')
 
 @section('content')
+  <!-- variável count usada para contar as linhas das tabelas -->
+  <?php 
+    $count = 0;
+  ?>
   <div class="row">
     @if(session('msg'))
       <p class="bg-success text-center text-light">{{session('msg')}}</p>
@@ -33,8 +37,13 @@
         <tbody class="table-group-divider">
           <!--Linha 1-->
           @foreach($customers as $customer)
+            @if(session()->get('company_id') == $customer["company_id"])
+            <!-- incrementando a variável de count das linhas -->
+            <?php 
+              $count++;
+            ?>
             <tr>
-              <th scope="row" class="text-center">{{$loop->index + 1}}</th>
+              <th scope="row" class="text-center">{{$count}}</th>
               <td >{{$customer["name"]}}</td>
               <td class="text-center">{{$customer["email"]}}</td>
               <td class="text-center">
@@ -158,6 +167,7 @@
                 </div>
               </div>
             </div>
+            @endif
           @endforeach
         </tbody>
       </table>

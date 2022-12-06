@@ -24,26 +24,31 @@
                     <!-- <textarea name="" class="form-control" rows="3">{{$inspection[0]["description"]}}</textarea> -->
                     <!-- <input class="form-control" type="text" value='{{$inspection[0]["description"]}}'> -->
                 </div>
-                <div class="mb-3 d-flex">
-                    <label class="form-label me-1"><strong>Data de início:</strong></label>
-                    <div class="d-inline ps-1"> {{$inspection[0]["start_date"]}} </div>
+                <div class="d-flex">
+                    <div class="mb-0 d-flex">
+                        <label class="form-label me-1"><strong>Inspetor:</strong></label>
+                        <div class="d-inline ps-1">{{$inspection[0]["user"]["name"]}}</div>
+                    </div>
                     <label class="form-label ms-4 me-1"><strong>Situação:</strong></label>
                         @if($inspection[0]["is_finished"])
                             <div class="d-inline ps-1">Concluída</div>
                         @else
                             <div class="d-inline ps-1">Não Concluída</div>
                         @endif
-                    @if($inspection[0]["is_finished"] == 1)
-                        <div class="d-flex mx-3">
-                            <label class="form-label"><strong>Data de conclusão:</strong></label>
-                            <div class="d-inline ps-1">{{$inspection[0]["end_date"]}}</div>
+                   
+                </div>
+                
+                <label class="form-label"><strong>Data de início:</strong></label>
+                <div class="d-inline"> {{date('d/m/Y',strtotime($inspection[0]["start_date"]))}} </div>
+            
+            
+                @if($inspection[0]["is_finished"] == 1)
+                        <div class="d-flex">
+                            <label class="form-label me-1 mb-0"><strong>Data de conclusão:</strong></label>
+                            <div class="d-inline">{{date('d/m/Y',strtotime($inspection[0]["end_date"]))}}</div>
                         </div>
-                    @endif
-                </div>
-                <div class="mb-3 d-flex">
-                    <label class="form-label me-1"><strong>Inspetor:</strong></label>
-                    <div class="d-inline ps-1">{{$inspection[0]["user"]["name"]}}</div>
-                </div>
+                @endif     
+                
             </div>
         </div>
 
@@ -66,7 +71,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col"></th>
                             <th scope="col">Nome</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Peso</th>
@@ -115,37 +120,43 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label class="form-label">Nome Extintor:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["name"]}}</div>
+                                                <label class="form-label fw-bold">Nome Extintor:</label>
+                                                <div class="border rounded-3 p-2">{{$extinguisher["name"]}}</div>
                                                 
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Tipo Extintor:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["type"]}}</div>
+                                                <label class="form-label fw-bold">Tipo Extintor:</label>
+                                                <div class="border rounded-3 p-2">{{$extinguisher["type"]}}</div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Peso:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["weight"]}}kg</div>
+                                                <label class="form-label fw-bold">Peso:</label>
+                                                <div class="border rounded-3 p-2">{{$extinguisher["weight"]}}kg</div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label mb-1">Status do Equipamento:</label>
+                                                <label class="form-label mb-1 fw-bold">Status do Equipamento:</label>
                                                 @if($extinguisher["is_approved"])
-                                                    <div class="fw-bold border rounded-3 p-2">Aprovado</div>
+                                                    <div class="border rounded-3 p-2">Aprovado</div>
                                                 @else
-                                                    <div class="fw-bold border rounded-3 p-2">Reprovado</div>
+                                                    <div class="border rounded-3 p-2">Reprovado</div>
                                                 @endif
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Descrição:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["description"]}}</div>
+                                                <label class="form-label fw-bold">Descrição:</label>
+                                                <div class="border rounded-3 p-2">{{$extinguisher["description"]}}</div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Endereço da foto do extintor:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["extinguisher_url_photo"]}}</div>
+                                            <div class="mb-3 d-flex justify-content-center">
+                                                <div class="d-flex flex-column text-center">
+                                                    <label class="form-label fw-bold">Foto do extintor:</label>
+                                                    <img src='/img/extinguishers/{{$extinguisher["extinguisher_url_photo"]}}' class="d-block border rounded-3 p-2" alt="Foto do extintor" width="250">
+                                                </div>
+                                                    <!-- <div class="fw-bold border rounded-3 p-2"><a class="text-decoration-none" href='http://{{$extinguisher["extinguisher_url_photo"]}}'>{{$extinguisher["extinguisher_url_photo"]}}</a></div> -->
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Endereço da foto do selo de inspeção:</label>
-                                                <div class="fw-bold border rounded-3 p-2">{{$extinguisher["inspection_seal_url_photo"]}}</div>
+                                            <div class="mb-3 d-flex justify-content-center">
+                                                <div class="d-flex flex-column text-center">
+                                                    <label class="form-label fw-bold">Selo do extintor:</label>
+                                                    <img src='/img/extinguishers/{{$extinguisher["inspection_seal_url_photo"]}}' class="d-block border rounded-3 p-2" alt="Foto do selo do extintor" width="250">
+                                                    <!-- <div class="fw-bold border rounded-3 p-2"><a class="text-decoration-none" href='http://{{$extinguisher["inspection_seal_url_photo"]}}'>{{$extinguisher["inspection_seal_url_photo"]}}</a></div> -->
+                                                </div>
                                             </div>
                                             
                                         </div>
@@ -157,7 +168,7 @@
                             </div>
 
 
-                            <!-- DELETAR INSPEÇÃO -->
+                            <!-- DELETAR EXTINTOR -->
                             <div class="modal fade" id='deleteExtinguisher-{{$extinguisher["id"]}}' tabindex="-1" aria-labelledby="deletar" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -184,30 +195,34 @@
                 </table>
             </div>
         </div>
-        @if(session()->get('role') !=1)
-            <div class="card mt-2">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h5 class="card-title">Finalização</h5>
-                        </div>
-                        <div class="col">
-                            @if($inspection[0]["is_finished"] == 0)
-                                <form action='/inspection/{{$inspection[0]["id"]}}/finish' method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">FINALIZAR INSPEÇÃO</button>
-                                </form>
-                            @else
-                                <form action='/inspection/{{$inspection[0]["id"]}}/unfinished' method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">RETOMAR INSPEÇÃO</button>
-                                </form>
-                            @endif
-                        </div>
+        
+        <div class="card mt-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="card-title">Finalização</h5>
+                    </div>
+                    <div class="col">
+                        @if($inspection[0]["is_finished"] == 0)
+                            <form action='/inspection/{{$inspection[0]["id"]}}/finish' method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">FINALIZAR INSPEÇÃO</button>
+                            </form>
+                        @else
+                            <form action='/inspection/{{$inspection[0]["id"]}}/unfinished' method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">RETOMAR INSPEÇÃO</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
-        @endif
+        </div>
+        
+        <div class="d-flex justify-content-center mt-4">
+            <a href="/inspections" class="btn btn-primary">VOLTAR</a>
+        </div>
+        
     </div>
 
     <!-- MODAL DE CADASTRO DE EXTINTOR -->
@@ -219,7 +234,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action='/extinguisher/{{$inspection[0]["id"]}}' method="POST">
+                    <form action='/extinguisher/{{$inspection[0]["id"]}}' method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Nome Extintor</label>
@@ -227,11 +242,24 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Tipo Extintor</label>
-                            <input name="type" type="text" class="form-control" required>
+                            <!-- <input name="type" type="text" class="form-control" required> -->
+                            <select name="type" class="form-control" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="Água">Água</option>
+                                <option value="CO2">CO2</option>
+                                <option value="Pó químico BC">Pó químico BC</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Peso</label>
-                            <input name="weight" type="text" class="form-control" required>
+                            <select name="weight" class="form-control" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="4">4kg</option>
+                                <option value="6">6kg</option>
+                                <option value="12">12kg</option>
+                                <option value="24">24kg</option>
+                            </select>
+                            <!-- <input name="weight" type="number" min="1" max="30" class="form-control" style="width:15%" required> -->
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Status do Equipamento</label>
@@ -263,7 +291,7 @@
                             <input name="extinguisher_url_photo" class="form-control" type="file" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Foto do selo de inspeção</label>
+                            <label class="form-label">Foto do selo do extintor</label>
                             <input name="inspection_seal_url_photo" class="form-control" type="file" required>
                         </div>
                     </div>
