@@ -247,7 +247,7 @@
                                 <option value="">Selecione uma opção</option>
                                 <option value="Água">Água</option>
                                 <option value="CO2">CO2</option>
-                                <option value="Pó químico BC">Pó químico BC</option>
+                                <option value="Pó Químico BC">Pó Químico BC</option>
                             </select>
                         </div>
                         <div class="mb-3">

@@ -155,7 +155,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   
-                  <p class="text-muted text-center mt-2">Id: <b>{{$customer["id"]}}</b><br>Nome: <b>{{$customer["name"]}}</b></p>
+                  <p class="text-muted text-center mt-2">Nome: <b>{{$customer["name"]}}</b></p>
                   <form action='customer/{{$customer["id"]}}' method="POST">
                     @csrf
                     @method('DELETE')

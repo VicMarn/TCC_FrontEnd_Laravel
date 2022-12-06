@@ -168,7 +168,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
-                    <p class="text-muted text-center mt-2">Id: <b>{{$sysUser["id"]}}</b><br>Nome: <b>{{$sysUser["name"]}}</b></p>
+                    <p class="text-muted text-center mt-2">Nome: <b>{{$sysUser["name"]}}</b></p>
                     <form action='user/{{$sysUser["id"]}}' method="POST">
                       @csrf
                       @method('DELETE')

@@ -76,7 +76,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <p class="text-muted text-center mt-2">Id: <b>{{$inspection["id"]}}</b><br>Título: <b>{{$inspection["title"]}}</b></p>
+                        <p class="text-muted text-center mt-2">Título: <b>{{$inspection["title"]}}</b></p>
                         <form action='inspection/{{$inspection["id"]}}' method="POST">
                           @csrf
                           @method('DELETE')
@@ -104,7 +104,7 @@
                     <td class="text-center">
                       <div class="col">
                         @if($inspection["is_finished"] == 0)
-                          <a href='inspection/{{$inspection["id"]}}' class="btn btn-primary">INSPECIONAR</a>
+                          <a href='inspection/{{$inspection["id"]}}' class="btn btn-warning text-light">VISUALIZAR</a>
                         @else
                           <a href='inspection/{{$inspection["id"]}}' class="btn btn-success">VISUALIZAR</a>
                         @endif
@@ -131,7 +131,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <p class="text-muted text-center mt-2">Id: <b>{{$inspection["id"]}}</b><br>Título: <b>{{$inspection["title"]}}</b></p>
+                        <p class="text-muted text-center mt-2">Título: <b>{{$inspection["title"]}}</b></p>
                         <form action='inspection/{{$inspection["id"]}}' method="POST">
                           @csrf
                           @method('DELETE')
@@ -186,7 +186,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <p class="text-muted text-center mt-2">Id: <b>{{$inspection["id"]}}</b><br>Título: <b>{{$inspection["title"]}}</b></p>
+                        <p class="text-muted text-center mt-2">Título: <b>{{$inspection["title"]}}</b></p>
                         <form action='inspection/{{$inspection["id"]}}' method="POST">
                           @csrf
                           @method('DELETE')
