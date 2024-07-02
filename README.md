@@ -1,3 +1,10 @@
+>**Client-side do sistema apresentado como TCC do curso de ADS, na Fatec-RL.**
+
+>**O projeto consistia em uma aplicação web que auxiliava na realização e registro de inspeções de equipamentos de incêndio.**\
+>**Após o TCC, o projeto não foi levado a frente, sendo assim, este repositório serve somente para fins de consulta e não representa um produto pronto para produção.**
+
+```Desenvolvido em Laravel e Blade Templating Engine```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
